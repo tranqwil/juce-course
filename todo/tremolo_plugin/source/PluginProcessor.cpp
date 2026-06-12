@@ -56,6 +56,7 @@ void PluginProcessor::prepareToPlay(double sampleRate,
   // initialization that you need, e.g., allocate memory.
 
   tremolo.prepare(sampleRate, expectedMaxFramesPerBlock);
+
 }
 
 void PluginProcessor::releaseResources() {
@@ -107,6 +108,7 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float>& buffer,
 
   // apply tremolo
   tremolo.process(buffer);
+  tremolo.setLfoWaveform(Tremolo::LfoWaveform::triangle);
 }
 
 bool PluginProcessor::hasEditor() const {

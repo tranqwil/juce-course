@@ -24,12 +24,19 @@ public:
 
     for (auto& lfo : lfos) {
       lfo.prepare(processSpec);
+
     }
+
+    lfoWaveformSmoother.reset(sampleRate, 0.05);
+
+
   }
 
 
 
   void process(juce::AudioBuffer<float>& buffer) noexcept {
+
+    updateLfoWaveform();
     // for each frame
     for (const auto frameIndex : std::views::iota(0, buffer.getNumSamples())) {
       // generate the LFO value
@@ -71,6 +78,9 @@ private:
 
   float getNextLfoValue()
   {
+    if (lfoWaveformSmoother.isSmoothing()) {
+      return lfoWaveformSmoother.getNextValue();
+    }
     return lfos[juce::toUnderlyingType(currentLfo)].processSample(0.0f);
   }
 
@@ -82,8 +92,15 @@ private:
   void updateLfoWaveform() {
 
     if (currentLfo != nextLfo) {
+
+      lfoWaveformSmoother.setCurrentAndTargetValue(getNextLfoValue());
+
       currentLfo = nextLfo;
+
+      lfoWaveformSmoother.setTargetValue(getNextLfoValue());
     }
+
+
   }
 
   // You should put class members and private functions here
@@ -92,6 +109,8 @@ private:
     juce::dsp::Oscillator<float>{[](auto phase) {return std::sin(phase);}},
     juce::dsp::Oscillator<float>{triangle}
   };
+
+  juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> lfoWaveformSmoother {0.f};
 
   LfoWaveform currentLfo = LfoWaveform::sine;
   LfoWaveform nextLfo = currentLfo;
