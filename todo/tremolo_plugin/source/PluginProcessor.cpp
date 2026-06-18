@@ -108,8 +108,10 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float>& buffer,
   tremolo.setGain(parameters.gain.get());
   // TODO: check for bypass
 
+
   // apply tremolo
-  tremolo.process(buffer);
+  if (!parameters.bypassed.get()) {tremolo.process(buffer);}
+
 }
 
 bool PluginProcessor::hasEditor() const {
@@ -137,6 +139,11 @@ void PluginProcessor::setStateInformation(const void* data, int sizeInBytes) {
   juce::ignoreUnused(data, sizeInBytes);
 
   // TODO: implement state deserialization from JSON
+}
+
+juce::AudioProcessorParameter* PluginProcessor::getBypassParameter() const
+{
+  return &parameters.bypassed;
 }
 }  // namespace tremolo
 
