@@ -32,7 +32,11 @@ public:
 
   }
 
-
+  void setModulationRate(float rateHz) {
+    for (auto& lfo : lfos) {
+      lfo.setFrequency(rateHz);
+    }
+  }
 
   void process(juce::AudioBuffer<float>& buffer) noexcept {
 
