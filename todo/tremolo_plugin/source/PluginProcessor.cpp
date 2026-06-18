@@ -105,6 +105,7 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float>& buffer,
 
   // TODO: update parameters
   tremolo.setModulationRate(parameters.rate.get());
+  tremolo.setGain(parameters.gain.get());
   // TODO: check for bypass
 
   // apply tremolo

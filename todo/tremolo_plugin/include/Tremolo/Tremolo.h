@@ -38,6 +38,10 @@ public:
     }
   }
 
+  void setGain(float gaindB) {
+    gain = gaindB;
+  }
+
   void process(juce::AudioBuffer<float>& buffer) noexcept {
 
     updateLfoWaveform();
@@ -47,6 +51,7 @@ public:
       const auto lfoValue = getNextLfoValue();
       constexpr auto modulationDepth = 0.4f;
       const auto modulationValue = modulationDepth * lfoValue + 1.f;
+      const auto gainValueLinear = juce::Decibels::decibelsToGain(gain.load());
 
       //  calculate the modulation value
 
@@ -57,7 +62,7 @@ public:
         const auto inputSample = buffer.getSample(channelIndex, frameIndex);
 
         //  modulate the sample
-        const auto outputSample = inputSample * modulationValue;
+        const auto outputSample = (inputSample * modulationValue) * gainValueLinear;
 
         // set the output sample
         buffer.setSample(channelIndex, frameIndex, outputSample);
@@ -113,6 +118,8 @@ private:
     juce::dsp::Oscillator<float>{[](auto phase) {return std::sin(phase);}},
     juce::dsp::Oscillator<float>{triangle}
   };
+
+  std::atomic<float> gain {0.0f};
 
   juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> lfoWaveformSmoother {0.f};
 
