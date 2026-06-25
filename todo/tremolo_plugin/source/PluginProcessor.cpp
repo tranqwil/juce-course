@@ -56,7 +56,12 @@ void PluginProcessor::prepareToPlay(double sampleRate,
   // initialization that you need, e.g., allocate memory.
 
   tremolo.prepare(sampleRate, expectedMaxFramesPerBlock);
-
+  bypassTransitionSmoother.prepare(juce::dsp::ProcessSpec{
+    .sampleRate = sampleRate,
+    .maximumBlockSize = static_cast<juce::uint32>(expectedMaxFramesPerBlock),
+    .numChannels = static_cast<juce::uint32>(
+      juce::jmax(getTotalNumInputChannels(), getTotalNumOutputChannels()))
+  });
 }
 
 void PluginProcessor::releaseResources() {
@@ -64,6 +69,7 @@ void PluginProcessor::releaseResources() {
   // spare memory, etc.
 
   tremolo.reset();
+  bypassTransitionSmoother.reset();
 }
 
 bool PluginProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const {
@@ -106,11 +112,18 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float>& buffer,
   // TODO: update parameters
   tremolo.setModulationRate(parameters.rate.get());
   tremolo.setGain(parameters.gain.get());
+  bypassTransitionSmoother.setBypass(parameters.bypassed.get());
   // TODO: check for bypass
+  if (parameters.bypassed.get() && !bypassTransitionSmoother.isTransitioning()) {
+    return;
+  }
 
+  bypassTransitionSmoother.setDryBuffer(buffer);
 
   // apply tremolo
-  if (!parameters.bypassed.get()) {tremolo.process(buffer);}
+  tremolo.process(buffer);
+
+  bypassTransitionSmoother.mixToWetBuffer(buffer);
 
 }
 
