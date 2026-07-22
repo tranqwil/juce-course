@@ -40,14 +40,24 @@ juce::AudioParameterBool& createBypassedParameter(juce::AudioProcessor& processo
     false);
   return addParameterToProcessor(processor, std::move(parameter));
 }
+
+juce::AudioParameterChoice& createWaveformParameter( juce::AudioProcessor& processor) {
+  constexpr auto versionHint = 1;
+
+  auto parameter = std::make_unique<juce::AudioParameterChoice>(
+    juce::ParameterID{"modulation.waveform", versionHint},
+    "Modulation Waveform",
+    juce::StringArray{"Sine", "Triangle"},
+    0);
+
+  return addParameterToProcessor(processor, std::move(parameter));
+}
 }
 Parameters::Parameters(juce::AudioProcessor& processor)
-// TODO: create parameters
-// TODO: retrieve references to parameters
-// TODO: add parameters to the processor
 : rate{createModulationRateParameter(processor)},
   gain{createGainParameter(processor)},
-  bypassed(createBypassedParameter(processor))
+  bypassed(createBypassedParameter(processor)),
+  waveform(createWaveformParameter(processor))
 {
 
 }
