@@ -51,9 +51,12 @@ void JsonSerializer::serialize(const Parameters& parameters,
         return;
     }
 
-    juce::JSON::writeToStream(output, json.value(), juce::JSON::FormatOptions{}
-        .withSpacing(juce::JSON::Spacing::multiLine)
-        .withMaxDecimalPlaces(2));
+    juce::JSON::writeToStream(
+        output,
+        *json,
+         juce::JSON::FormatOptions{}
+            .withSpacing(juce::JSON::Spacing::multiLine)
+            .withMaxDecimalPlaces(2));
 }
 
 juce::Result JsonSerializer::deserialize(juce::InputStream& input,
@@ -72,7 +75,16 @@ juce::Result JsonSerializer::deserialize(juce::InputStream& input,
         return juce::Result::fail("failed to parse parameters from JSON representation.");
     }
 
+    parameters.bypassed = parsedParameters->bypassed;
+    parameters.gain = parsedParameters->gain;
+    parameters.rate = parsedParameters->rate;
 
-  return juce::Result::fail("not implemented");
+    const auto modulationWaveformIndex = parameters.waveform.choices.indexOf(
+        parsedParameters->waveform);
+    parameters.waveform = modulationWaveformIndex;
+
+
+
+  return juce::Result::ok();
 }
 }  // namespace tremolo
