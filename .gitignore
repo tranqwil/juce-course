@@ -460,6 +460,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# Reaper Peaks Files
+*.reapeaks
+
 # IntelliJ
 .idea
 **/cmake-build*

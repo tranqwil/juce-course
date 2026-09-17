@@ -75,13 +75,17 @@ juce::Result JsonSerializer::deserialize(juce::InputStream& input,
         return juce::Result::fail("failed to parse parameters from JSON representation.");
     }
 
+    const auto modulationWaveformIndex = parameters.waveform.choices.indexOf(
+        parsedParameters->waveform);
+    if (modulationWaveformIndex < 0) {
+        return juce::Result::fail("waveform name parsed from JSON invalid.");
+    }
+    parameters.waveform = modulationWaveformIndex;
     parameters.bypassed = parsedParameters->bypassed;
     parameters.gain = parsedParameters->gain;
     parameters.rate = parsedParameters->rate;
 
-    const auto modulationWaveformIndex = parameters.waveform.choices.indexOf(
-        parsedParameters->waveform);
-    parameters.waveform = modulationWaveformIndex;
+
 
 
 
