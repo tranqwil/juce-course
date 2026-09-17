@@ -19,6 +19,18 @@ juce::AudioParameterFloat& createModulationRateParameter(juce::AudioProcessor& p
   return addParameterToProcessor(processor, std::move(parameter));
 }
 
+juce::AudioParameterFloat& createModulationDepthParameter(juce::AudioProcessor& processor) {
+  constexpr auto versionHint = 1;
+
+  auto parameter = std::make_unique<juce::AudioParameterFloat>(
+    juce::ParameterID{"modulation.depth", versionHint},
+    "Modulation Depth",
+    juce::NormalisableRange{0.0f, 1.0f, 0.01f, 1.0f, false},
+    0.4f,
+    juce::AudioParameterFloatAttributes{});
+  return addParameterToProcessor(processor, std::move(parameter));
+}
+
 juce::AudioParameterFloat& createGainParameter(juce::AudioProcessor& processor) {
   constexpr auto versionHint = 1;
 
@@ -55,6 +67,7 @@ juce::AudioParameterChoice& createWaveformParameter( juce::AudioProcessor& proce
 }
 Parameters::Parameters(juce::AudioProcessor& processor)
 : rate{createModulationRateParameter(processor)},
+  depth{createModulationDepthParameter(processor)},
   gain{createGainParameter(processor)},
   bypassed(createBypassedParameter(processor)),
   waveform(createWaveformParameter(processor))

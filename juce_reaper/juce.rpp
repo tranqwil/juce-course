@@ -1,4 +1,4 @@
-<REAPER_PROJECT 0.1 "7.52/win64" 1784726781
+<REAPER_PROJECT 0.1 "7.74/win64" 1789636532 0
   <NOTES 0 2
   >
   RIPPLE 0 0
@@ -15,11 +15,11 @@
   PROJOFFS 0 0 0
   MAXPROJLEN 0 0
   GRID 3199 8 1 8 1 0 0 0
-  TIMEMODE 1 9 -1 60 0 0 -1
+  TIMEMODE 1 9 -1 60 0 0 -1 0
   VIDEO_CONFIG 0 0 65792
   PANMODE 3
   PANLAWFLAGS 3
-  CURSOR 322.5
+  CURSOR 327.5
   ZOOM 36.03453718432881 10904 0
   VZOOMEX 14.10133839 0
   USE_REC_CFG 0
@@ -98,6 +98,9 @@
     ARM 0
     DEFSHAPE 1 -1 -1
   >
+  RULERHEIGHT 86 86
+  RULERLANE 1 4 "" 0 -1 0
+  RULERLANE 2 8 "" 0 -1 0
   <PROJBAY
   >
   <TRACK {DA8F4E86-8F1C-4455-A080-823966BA369E}
@@ -114,6 +117,7 @@
     BUSCOMP 0 0 0 0 0
     SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
     FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
     SEL 0
     REC 0 0 1 0 0 0 0 0
     VU 64
@@ -126,44 +130,28 @@
     MIDIOUT -1
     MAINSEND 1 0
     <FXCHAIN
-      WNDRECT 1804 433 1082 332
-      SHOW 2
+      WNDRECT 1063 261 827 247
+      SHOW 0
       LASTSEL 1
       DOCKED 0
       BYPASS 0 0 0
       <JS synthesis/tonegenerator ""
-        -19 -120 440 0 0 -21 2 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        -19 -120 440 0 0 -21 1 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       >
       FLOATPOS 0 0 0 0
       FXID {8DC029DF-31EF-4077-8EB2-DF93A6AEB9A6}
       WAK 0 0
       BYPASS 0 0 0
       <VST "VST3: Tremolo (Factory Immersive)" Tremolo.vst3 0 "" 931621757{ABCDEF019182FAEB46696D6D46697472} ""
-        fWuHN+5e7f4CAAAAAQAAAAAAAAACAAAAAAAAAAIAAAABAAAAAAAAAAIAAAAAAAAALwAAAAEAAAD//xAA
-        HwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAASlVDRVByaXZhdGVEYXRhAAAAAAAAAAA=
+        fWuHN+5e7f4CAAAAAQAAAAAAAAACAAAAAAAAAAIAAAABAAAAAAAAAAIAAAAAAAAA4wAAAAEAAAD//xAA
+        0wAAAAEAAAB7DQogICJfX3ZlcnNpb25fXyI6IDEsDQogICJwbHVnaW5OYW1lIjogIlRyZW1vbG8iLA0KICAibW9kdWxhdGlvblJhdGVIeiI6IDEzLjA2LA0KICAibW9k
+        dWxhdGlvbkRlcHRoIjogMC4wLA0KICAiZ2FpbiI6IDQuMiwNCiAgImJ5cGFzc2VkIjogZmFsc2UsDQogICJtb2R1bGF0aW9uV2F2ZWZvcm0iOiAiU2luZSINCn0AAAAA
+        AAAAAAAAAAAAAAAASlVDRVByaXZhdGVEYXRhAAAAAAAAAAA=
         AAAQAAAA
       >
       PRESETNAME None
       FLOATPOS 60 92 616 358
       FXID {B8BCAEB8-0671-4E3F-98C3-A7DF1EC66C14}
-      <PARMENV 0:971574802 0 1 0.5 "Modulation Rate / Tremolo"
-        EGUID {15D59C0B-BFFF-4981-BD3B-28233FC4DC11}
-        ACT 0 -1
-        VIS 1 1 1
-        LANEHEIGHT 0 0
-        ARM 0
-        DEFSHAPE 0 -1 -1
-        PT 0 0 0
-      >
-      <PARMENV 1:3165055 0 1 0.5 "Gain / Tremolo"
-        EGUID {1DEB29CF-57B5-42BA-B3A2-09DB9790CD1B}
-        ACT 0 -1
-        VIS 1 1 1
-        LANEHEIGHT 0 0
-        ARM 0
-        DEFSHAPE 0 -1 -1
-        PT 0 0.49295774 0
-      >
       WAK 0 0
     >
   >
@@ -181,6 +169,7 @@
     BUSCOMP 0 0 0 0 0
     SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
     FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
     SEL 1
     REC 1 1024 1 1 0 0 0 0
     VU 64
@@ -215,10 +204,6 @@
       <SOURCE WAVE
         FILE "Media\02-260722_1424.wav"
       >
-    >
-  >
-  <EXTENSIONS
-    <FACTORY_IMMERSIVE_CHOIR_CUE_SHEET
     >
   >
 >

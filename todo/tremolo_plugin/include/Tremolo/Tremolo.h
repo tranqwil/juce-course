@@ -28,7 +28,8 @@ public:
     }
 
     lfoWaveformSmoother.reset(sampleRate, 0.05);
-    gainSmoother.reset(sampleRate, 0.005);
+    gainSmoother.reset(sampleRate, 0.05);
+    modulationDepthSmoother.reset(sampleRate, 0.05);
 
 
   }
@@ -49,6 +50,14 @@ public:
 
   }
 
+  void updateModulationDepth(float inDepth) {
+    if (modulationDepth != inDepth) {
+      modulationDepthSmoother.setCurrentAndTargetValue(modulationDepth);
+      modulationDepth = inDepth;
+      modulationDepthSmoother.setTargetValue(modulationDepth);
+    }
+  }
+
   void process(juce::AudioBuffer<float>& buffer) noexcept {
 
     updateLfoWaveform();
@@ -56,8 +65,8 @@ public:
     for (const auto frameIndex : std::views::iota(0, buffer.getNumSamples())) {
       // generate the LFO value
       const auto lfoValue = getNextLfoValue();
-      constexpr auto modulationDepth = 0.4f;
-      const auto modulationValue = modulationDepth * lfoValue + 1.f;
+      const auto modulationDepthValue = modulationDepthSmoother.isSmoothing() ? modulationDepthSmoother.getNextValue() : modulationDepth.load();
+      const auto modulationValue = modulationDepthValue * lfoValue + 1.f;
       const auto gainValueLinear = juce::Decibels::decibelsToGain(gainSmoother.isSmoothing() ? gainSmoother.getNextValue() : gain.load());
 
       //  calculate the modulation value
@@ -127,9 +136,11 @@ private:
   };
 
   std::atomic<float> gain {0.0f};
+  std::atomic<float> modulationDepth {0.4f};
 
   juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> lfoWaveformSmoother {0.f};
   juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> gainSmoother {0.0f};
+  juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> modulationDepthSmoother {modulationDepth};
 
   LfoWaveform currentLfo = LfoWaveform::sine;
   LfoWaveform nextLfo = currentLfo;
