@@ -13,7 +13,7 @@ juce::AudioParameterFloat& createModulationRateParameter(juce::AudioProcessor& p
   auto parameter = std::make_unique<juce::AudioParameterFloat>(
     juce::ParameterID{"modulation.rate", versionHint},
     "Modulation Rate",
-    juce::NormalisableRange{0.1f, 10000.0f, 0.01f, 0.4f, false},
+    juce::NormalisableRange{0.0f, 100.0f, 0.01f, 0.4f, false},
     5.0f,
     juce::AudioParameterFloatAttributes{}.withLabel("Hz"));
   return addParameterToProcessor(processor, std::move(parameter));

@@ -99,6 +99,11 @@ public:
 
   }
 
+  static float triangle (float  phase) {
+    const auto ft = phase / juce::MathConstants<float>::twoPi;
+    return 4.0f * std::abs(ft - std::floor(ft + 0.5f)) - 1.0f;
+  }
+
 private:
 
   float getNextLfoValue()
@@ -109,10 +114,7 @@ private:
     return lfos[juce::toUnderlyingType(currentLfo)].processSample(0.0f);
   }
 
-  static float triangle (float  phase) {
-    const auto ft = phase / juce::MathConstants<float>::twoPi;
-    return 4.0f * std::abs(ft - std::floor(ft + 0.5f)) - 1.0f;
-  }
+
 
   void updateLfoWaveform() {
 
