@@ -3,7 +3,8 @@ PluginEditor::PluginEditor(PluginProcessor& p)
 : AudioProcessorEditor(&p),
   modulationRateAttachment(p.getParameterRefs().rate, modulationRateSlider),
   modulationDepthAttachment(p.getParameterRefs().depth, modulationDepthSlider),
-  gainAttachment(p.getParameterRefs().gain, gainSlider)
+  gainAttachment(p.getParameterRefs().gain, gainSlider),
+  bypassedAttachment(p.getParameterRefs().bypassed, bypassedButton)
 
 {
   background.setImage(juce::ImageCache::getFromMemory(
@@ -26,6 +27,7 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   addAndMakeVisible(modulationRateSlider);
   addAndMakeVisible(modulationDepthSlider);
   addAndMakeVisible(gainSlider);
+  addAndMakeVisible(bypassedButton);
 
   // Make sure that before the constructor has finished, you've set the
   // editor's size to whatever you need it to be.
@@ -41,6 +43,7 @@ void PluginEditor::resized() {
   modulationRateSlider.setBounds({90, 40, 80, 80});
   modulationDepthSlider.setBounds({230, 60, 80, 80});
   gainSlider.setBounds({390, 40, 80, 80});
+  bypassedButton.setBounds(450, 0, 80, 35);
 
 
 }

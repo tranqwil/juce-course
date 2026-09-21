@@ -19,6 +19,8 @@ private:
   juce::SliderParameterAttachment modulationDepthAttachment;
   juce::Slider gainSlider{juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::TextEntryBoxPosition::NoTextBox};
   juce::SliderParameterAttachment gainAttachment;
+  juce::ToggleButton bypassedButton{"Bypassed"};
+  juce::ButtonParameterAttachment bypassedAttachment;
 
 
 
