@@ -14,14 +14,16 @@ private:
   LfoVisualizer lfoVisualizer;
 
   // controls
-  juce::Slider modulationRateSlider{juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::TextEntryBoxPosition::NoTextBox};
+  juce::Slider modulationRateSlider{juce::Slider::SliderStyle::RotaryVerticalDrag, juce::Slider::TextEntryBoxPosition::NoTextBox};
   juce::SliderParameterAttachment modulationRateAttachment;
-  juce::Slider modulationDepthSlider{juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::TextEntryBoxPosition::NoTextBox};
+  juce::Slider modulationDepthSlider{juce::Slider::SliderStyle::RotaryVerticalDrag, juce::Slider::TextEntryBoxPosition::NoTextBox};
   juce::SliderParameterAttachment modulationDepthAttachment;
-  juce::Slider gainSlider{juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::TextEntryBoxPosition::NoTextBox};
+  juce::Slider gainSlider{juce::Slider::SliderStyle::RotaryVerticalDrag, juce::Slider::TextEntryBoxPosition::NoTextBox};
   juce::SliderParameterAttachment gainAttachment;
   juce::ToggleButton bypassedButton{"Bypassed"};
   juce::ButtonParameterAttachment bypassedAttachment;
+  juce::ComboBox waveformComboBox{"Waveform"};
+  juce::ComboBoxParameterAttachment waveformAttachment;
   CustomLookAndFeel customLookAndFeel;
 
 

@@ -4,7 +4,8 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   modulationRateAttachment(p.getParameterRefs().rate, modulationRateSlider),
   modulationDepthAttachment(p.getParameterRefs().depth, modulationDepthSlider),
   gainAttachment(p.getParameterRefs().gain, gainSlider),
-  bypassedAttachment(p.getParameterRefs().bypassed, bypassedButton)
+  bypassedAttachment(p.getParameterRefs().bypassed, bypassedButton),
+  waveformAttachment(p.getParameterRefs().waveform, waveformComboBox)
 
 {
   setLookAndFeel(&customLookAndFeel);
@@ -17,13 +18,13 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   modulationRateSlider.setPopupDisplayEnabled(true, true, this);
   modulationRateSlider.setTextValueSuffix("Hz");
 
-
   modulationDepthSlider.setPopupDisplayEnabled(true, true, this);
-
 
   gainSlider.setPopupDisplayEnabled(true, true, this);
   gainSlider.setTextValueSuffix("dB");
 
+  waveformComboBox.addItemList(p.getParameterRefs().waveform.choices, 1);
+  waveformAttachment.sendInitialUpdate();
 
   addAndMakeVisible(background);
   //addAndMakeVisible(logo);
@@ -32,6 +33,7 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   addAndMakeVisible(modulationDepthSlider);
   addAndMakeVisible(gainSlider);
   addAndMakeVisible(bypassedButton);
+  addAndMakeVisible(waveformComboBox);
 
   // Make sure that before the constructor has finished, you've set the
   // editor's size to whatever you need it to be.
@@ -54,7 +56,9 @@ void PluginEditor::resized() {
   modulationDepthSlider.setBounds({228, 45, 80, 80});
   gainSlider.setBounds({332, 45, 80, 80});
 
+
   bypassedButton.setBounds(484, 0, 56, 56);
+  waveformComboBox.setBounds(484, 214, 56, 56);
 
 
 }
