@@ -4,6 +4,7 @@ namespace tremolo {
 class PluginEditor : public juce::AudioProcessorEditor {
 public:
   explicit PluginEditor(PluginProcessor&);
+  ~PluginEditor() override;
 
   void resized() override;
 
@@ -21,6 +22,7 @@ private:
   juce::SliderParameterAttachment gainAttachment;
   juce::ToggleButton bypassedButton{"Bypassed"};
   juce::ButtonParameterAttachment bypassedAttachment;
+  CustomLookAndFeel customLookAndFeel;
 
 
 

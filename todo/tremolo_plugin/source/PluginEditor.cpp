@@ -7,6 +7,7 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   bypassedAttachment(p.getParameterRefs().bypassed, bypassedButton)
 
 {
+  setLookAndFeel(&customLookAndFeel);
   background.setImage(juce::ImageCache::getFromMemory(
       assets::Background_png, assets::Background_pngSize));
 
@@ -16,10 +17,13 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   modulationRateSlider.setPopupDisplayEnabled(true, true, this);
   modulationRateSlider.setTextValueSuffix("Hz");
 
+
   modulationDepthSlider.setPopupDisplayEnabled(true, true, this);
+
 
   gainSlider.setPopupDisplayEnabled(true, true, this);
   gainSlider.setTextValueSuffix("dB");
+
 
   addAndMakeVisible(background);
   //addAndMakeVisible(logo);
@@ -34,15 +38,22 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   setSize(540, 270);
 }
 
+PluginEditor::~PluginEditor()
+{
+  setLookAndFeel(nullptr);
+}
+
 void PluginEditor::resized() {
   auto bounds = getLocalBounds();
   background.setBounds(bounds);
 
   //logo.setBounds({16, 16, 105, 24});
   lfoVisualizer.setBounds({135, 160, 270, 64});
-  modulationRateSlider.setBounds({90, 40, 80, 80});
-  modulationDepthSlider.setBounds({230, 60, 80, 80});
-  gainSlider.setBounds({390, 40, 80, 80});
+
+  modulationRateSlider.setBounds({132, 45, 80, 80});
+  modulationDepthSlider.setBounds({228, 45, 80, 80});
+  gainSlider.setBounds({332, 45, 80, 80});
+
   bypassedButton.setBounds(450, 0, 80, 35);
 
 
