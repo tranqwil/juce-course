@@ -9,8 +9,8 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   background.setImage(juce::ImageCache::getFromMemory(
       assets::Background_png, assets::Background_pngSize));
 
-    logo.setImage(
-      juce::ImageCache::getFromMemory(assets::Logo_png, assets::Logo_pngSize));
+    //logo.setImage(
+    // juce::ImageCache::getFromMemory(assets::Logo_png, assets::Logo_pngSize));
 
   modulationRateSlider.setPopupDisplayEnabled(true, true, this);
   modulationRateSlider.setTextValueSuffix("Hz");
@@ -21,7 +21,7 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   gainSlider.setTextValueSuffix("dB");
 
   addAndMakeVisible(background);
-  addAndMakeVisible(logo);
+  //addAndMakeVisible(logo);
   addAndMakeVisible(lfoVisualizer);
   addAndMakeVisible(modulationRateSlider);
   addAndMakeVisible(modulationDepthSlider);
@@ -36,10 +36,10 @@ void PluginEditor::resized() {
   auto bounds = getLocalBounds();
   background.setBounds(bounds);
 
-  logo.setBounds({16, 16, 105, 24});
-  lfoVisualizer.setBounds({18, 149, 504, 92});
+  //logo.setBounds({16, 16, 105, 24});
+  lfoVisualizer.setBounds({135, 160, 270, 64});
   modulationRateSlider.setBounds({90, 40, 80, 80});
-  modulationDepthSlider.setBounds({230, 40, 80, 80});
+  modulationDepthSlider.setBounds({230, 60, 80, 80});
   gainSlider.setBounds({390, 40, 80, 80});
 
 

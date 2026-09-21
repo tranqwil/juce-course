@@ -5,7 +5,7 @@ class LfoVisualizer : public juce::Component {
     public:
     void paint (juce::Graphics& g) override {
 
-        g.setColour(juce::Colours::green);
+        g.setColour(waveformColour);
         g.strokePath(line, juce::PathStrokeType(strokeWidth));
     }
 
@@ -39,7 +39,8 @@ class LfoVisualizer : public juce::Component {
 
     const float strokeWidth = 3.0f;
     juce::Path line;
-    Tremolo::LfoWaveform waveform = Tremolo::LfoWaveform::sine;
+    Tremolo::LfoWaveform waveform = Tremolo::LfoWaveform::triangle;
+    juce::Colour waveformColour {juce::uint8{255}, juce::uint8{255}, juce::uint8{146}};
 
 };
 }
