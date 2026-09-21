@@ -9,5 +9,7 @@ class CustomLookAndFeel : public juce::LookAndFeel_V4 {
 
     private:
     juce::Image rotarySliderImage;
+    juce::Image bypassOnImage;
+    juce::Image bypassOffImage;
 };
 }  // namespace tremolo

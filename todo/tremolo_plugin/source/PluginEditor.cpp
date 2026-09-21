@@ -54,7 +54,7 @@ void PluginEditor::resized() {
   modulationDepthSlider.setBounds({228, 45, 80, 80});
   gainSlider.setBounds({332, 45, 80, 80});
 
-  bypassedButton.setBounds(450, 0, 80, 35);
+  bypassedButton.setBounds(484, 0, 56, 56);
 
 
 }

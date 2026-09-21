@@ -3,13 +3,31 @@ namespace tremolo {
 CustomLookAndFeel::CustomLookAndFeel() : juce::LookAndFeel_V4()
 {
     rotarySliderImage = juce::ImageCache::getFromMemory(assets::RotarySlider_png, assets::RotarySlider_pngSize);
+    bypassOffImage = juce::ImageCache::getFromMemory(assets::BypassOff_png, assets::BypassOff_pngSize);
+    bypassOnImage = juce::ImageCache::getFromMemory(assets::BypassOn_png, assets::BypassOn_pngSize);
     jassert(rotarySliderImage.isValid());
+    jassert(bypassOffImage.isValid());
+    jassert(bypassOnImage.isValid());
+
 
 }
 
 void CustomLookAndFeel::drawToggleButton(juce::Graphics& g, juce::ToggleButton& button,
                                        bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)
 {
+    g.drawImage(
+        button.getToggleState() ? bypassOnImage : bypassOffImage,
+        0,
+        0,
+        button.getWidth(),
+        button.getHeight(),
+        0,
+        0,
+        bypassOnImage.getWidth(),
+        bypassOnImage.getHeight()
+        );
+
+
 
 
 }
@@ -29,16 +47,6 @@ void CustomLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int wi
     juce::AffineTransform rotation = juce::AffineTransform::rotation(radians, centerX, centerY);
     g.addTransform(rotation);
     g.drawImageAt(rotarySliderImage, x, y);
-
-
-
-
-
-
-
-
-
-
 
 }
 }  // namespace tremolo

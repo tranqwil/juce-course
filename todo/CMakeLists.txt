@@ -100,6 +100,8 @@ juce_add_binary_data(tremolo_plugin_assets
     assets/Background.png
     assets/Logo.png
     assets/RotarySlider.png
+    assets/BypassOff.png
+    assets/BypassOn.png
     # TODO: Add custom font files
 )
 
