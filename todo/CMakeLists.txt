@@ -103,7 +103,7 @@ juce_add_binary_data(tremolo_plugin_assets
     assets/BypassOff.png
     assets/BypassOn.png
     assets/Shape.png
-    # TODO: Add custom font files
+    assets/SpaceGrotesk-Light.ttf
 )
 
 add_library(tremolo::tremolo_plugin_assets ALIAS tremolo_plugin_assets)

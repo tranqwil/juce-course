@@ -1,11 +1,15 @@
 namespace tremolo {
 
 CustomLookAndFeel::CustomLookAndFeel() : juce::LookAndFeel_V4()
+
 {
     rotarySliderImage = juce::ImageCache::getFromMemory(assets::RotarySlider_png, assets::RotarySlider_pngSize);
     bypassOffImage = juce::ImageCache::getFromMemory(assets::BypassOff_png, assets::BypassOff_pngSize);
     bypassOnImage = juce::ImageCache::getFromMemory(assets::BypassOn_png, assets::BypassOn_pngSize);
     shapeImage = juce::ImageCache::getFromMemory(assets::Shape_png, assets::Shape_pngSize);
+
+    setDefaultSansSerifTypeface(customTypeface);
+    juce::LookAndFeel::setDefaultLookAndFeel(this);
 
     setColour(juce::PopupMenu::backgroundColourId, juce::Colours::black);
     setColour(juce::PopupMenu::textColourId, colourInactive);

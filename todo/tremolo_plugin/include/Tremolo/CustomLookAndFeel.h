@@ -1,4 +1,5 @@
 #pragma once
+#include <TremoloPluginAssets.h>
 
 namespace tremolo {
 class CustomLookAndFeel : public juce::LookAndFeel_V4 {
@@ -28,5 +29,8 @@ class CustomLookAndFeel : public juce::LookAndFeel_V4 {
     //Colours
     juce::Colour colourActive {juce::uint8{255}, juce::uint8{255}, juce::uint8{146}};
     juce::Colour colourInactive{juce::uint8{114}, juce::uint8{114}, juce::uint8{114}};
+
+    //font
+    juce::Typeface::Ptr customTypeface {juce::Typeface::createSystemTypefaceFor (tremolo::assets::SpaceGroteskLight_ttf, tremolo::assets::SpaceGroteskLight_ttfSize)};
 };
 }  // namespace tremolo
